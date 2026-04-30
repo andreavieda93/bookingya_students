@@ -119,7 +119,7 @@ git checkout estudiantes
 Copia el archivo `.env.example` y renómbralo a `.env`:
 
 ```bash
-cp .env.example .env
+cp .env .env
 ```
 
 Luego abre el archivo `.env` y llena tus propias credenciales de PostgreSQL:
