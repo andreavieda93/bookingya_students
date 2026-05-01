@@ -2,7 +2,6 @@ package com.project.bookingya.tdd;
 import com.project.bookingya.dtos.ReservationDto;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
-
 import com.project.bookingya.services.ReservationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -78,14 +77,9 @@ public class ReservationServiceTestTdd {
 
         when(roomRepository.findById(any())).thenReturn(Optional.of(habitacion));
         when(guestRepository.findById(any())).thenReturn(Optional.of(new GuestEntity()));
-
-        // Mock del mapeo DTO -> Entity
         when(mapper.map(any(ReservationDto.class), eq(ReservationEntity.class))).thenReturn(entidadPrueba);
         when(reservationRepository.saveAndFlush(any())).thenReturn(entidadPrueba);
-
-        // Mock del mapeo Entity -> Model
         when(mapper.map(any(ReservationEntity.class), eq(Reservation.class))).thenReturn(modeloPrueba);
-
         Reservation resultado = reservationService.create(dtoPrueba);
 
         assertNotNull(resultado);
@@ -94,16 +88,12 @@ public class ReservationServiceTestTdd {
 
     @Test
     void actualizarReservaExistenteOk() {
-        // Mock de la reserva
         when(reservationRepository.findById(idPrueba)).thenReturn(Optional.of(entidadPrueba));
         RoomEntity habitacionPrueba = new RoomEntity();
         habitacionPrueba.setAvailable(true);
         habitacionPrueba.setMaxGuests(10);
         when(roomRepository.findById(any())).thenReturn(Optional.of(habitacionPrueba));
-        // Mock del cliente
         when(guestRepository.findById(any())).thenReturn(Optional.of(new GuestEntity()));
-
-        // Mock del comportamiento del mapper
         doNothing().when(mapper).map(any(ReservationDto.class), any(ReservationEntity.class));
         when(reservationRepository.saveAndFlush(any(ReservationEntity.class))).thenReturn(entidadPrueba);
         when(mapper.map(any(ReservationEntity.class), eq(Reservation.class))).thenReturn(modeloPrueba);
