@@ -1,4 +1,4 @@
-package com.project.bookingya.bdd.steps;
+package com.project.bookingya.bdd.stepsdefinitions;
 
 import com.project.bookingya.dtos.ReservationDto;
 import net.serenitybdd.annotations.Step;
