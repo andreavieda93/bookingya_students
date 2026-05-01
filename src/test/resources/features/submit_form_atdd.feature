@@ -3,7 +3,7 @@ Característica: Gestión de Reservas de Hotel
 
   Escenario: Creación exitosa de una nueva reserva
     Dado que el huésped accede a la página de reservas
-    Cuando completa el formulario con la habitación "103" para "2" personas
+    Cuando completa el formulario con la habitación "1033" para "2" personas
     Y confirma la operación de reserva
     Entonces el sistema debe mostrar el mensaje de confirmación "Reservation confirmed"
     Y la reserva debe figurar en el listado histórico del usuario

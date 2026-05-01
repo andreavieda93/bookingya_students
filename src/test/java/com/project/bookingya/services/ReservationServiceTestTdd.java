@@ -92,28 +92,20 @@ public class ReservationServiceTestTdd {
 
     @Test
     void actualizarReservaExistenteOk() {
-        // Arrange
-        // 1. Mock de la reserva que vamos a actualizar
+        // Mock de la reserva
         when(reservationRepository.findById(idPrueba)).thenReturn(Optional.of(entidadPrueba));
-
-        // 2. Mock de la habitación (esto es lo que faltaba y causaba el "Room not found")
         RoomEntity habitacionPrueba = new RoomEntity();
         habitacionPrueba.setAvailable(true);
         habitacionPrueba.setMaxGuests(10);
         when(roomRepository.findById(any())).thenReturn(Optional.of(habitacionPrueba));
-
-        // 3. Mock del cliente (por si el service también valida el Guest)
+        // Mock del cliente
         when(guestRepository.findById(any())).thenReturn(Optional.of(new GuestEntity()));
 
-        // 4. Mock del comportamiento del mapper
+        // Mock del comportamiento del mapper
         doNothing().when(mapper).map(any(ReservationDto.class), any(ReservationEntity.class));
         when(reservationRepository.saveAndFlush(any(ReservationEntity.class))).thenReturn(entidadPrueba);
         when(mapper.map(any(ReservationEntity.class), eq(Reservation.class))).thenReturn(modeloPrueba);
-
-        // Act
         Reservation resultado = reservationService.update(dtoPrueba, idPrueba);
-
-        // Assert
         assertNotNull(resultado);
         verify(reservationRepository).findById(idPrueba);
         verify(roomRepository).findById(any()); // Verificamos que validó la habitación
@@ -123,9 +115,7 @@ public class ReservationServiceTestTdd {
     @Test
     void eliminarReservaSiExiste() {
         when(reservationRepository.findById(idPrueba)).thenReturn(Optional.of(entidadPrueba));
-
         reservationService.delete(idPrueba);
-
         verify(reservationRepository).delete(entidadPrueba);
     }
 }
