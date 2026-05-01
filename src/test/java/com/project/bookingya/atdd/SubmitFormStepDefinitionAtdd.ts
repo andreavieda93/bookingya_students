@@ -22,7 +22,7 @@ Before(async function () {
 Given('que el huésped accede a la página de reservas', async function () {
     const id = uniqueId();
     const guestRes = await apiContext.post('/api/guest', {
-        data: { name: "Eliana ATDD", email: `atdd_${id}@test.com`, identification: `ID-${id}` }
+        data: { name: "Ximena ATDD", email: `atdd_${id}@test.com`, identification: `ID-${id}` }
     });
     const guestData = await guestRes.json();
     guestId = guestData.id;
@@ -30,7 +30,7 @@ Given('que el huésped accede a la página de reservas', async function () {
     const roomRes = await apiContext.post('/api/room', {
         data: {
             roomNumber: `ROOM-${id}`, name: "Suite Ejecutiva", code: `C-${id}`,
-            city: "Manizales", maxGuests: 4, nightlyPrice: 200.0, available: true, type: "PREMIUM"
+            city: "Cali", maxGuests: 4, nightlyPrice: 200.0, available: true, type: "PREMIUM"
         }
     });
     const roomData = await roomRes.json();
